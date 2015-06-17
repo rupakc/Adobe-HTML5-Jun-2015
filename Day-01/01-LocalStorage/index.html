@@ -21,12 +21,25 @@
 
             var btnRemoveCompleted = document.getElementById("btnRemoveCompleted")
             btnRemoveCompleted.addEventListener("click", onBtnRemoveCompletedClick);
+
+            for(var i=0; i<localStorage.length; i++){
+                var taskId = localStorage.key(i);
+                var taskName = localStorage.getItem(taskId);
+                addTaskToList(taskId, taskName);
+            }
+
         }
         function onBtnAddClick(){
             var txtTask = document.getElementById("txtTask");
             var taskName = txtTask.value;
 
+            var taskId = Date.now().toString();
+            localStorage.setItem(taskId, taskName);
+            addTaskToList(taskId, taskName);
+        }
+        function addTaskToList(taskId, taskName){
             var newTask = document.createElement("li");
+            newTask.setAttribute("taskId", taskId);
             newTask.innerHTML = taskName;
             newTask.addEventListener("click", onTaskItemClick);
             document.getElementById("olTaskList").appendChild(newTask);
@@ -38,8 +51,11 @@
             var olTaskList = document.getElementById("olTaskList");
             for(var i=olTaskList.children.length-1; i>=0; i--){
                 var taskItem = olTaskList.children[i];
-                if (taskItem.classList.contains("completed"))
+                if (taskItem.classList.contains("completed")){
+                    var taskIdtoRemove = taskItem.getAttribute("taskId");
+                    localStorage.removeItem(taskIdtoRemove);
                     taskItem.remove();
+                }
             }
         }
         /*
