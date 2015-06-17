@@ -5,9 +5,15 @@ function doWork(){
             {}
 }
 self.addEventListener("message", onMessageFromMain);
-function onMessageFromMain(){
-    doWork();
-    self.postMessage("done");
-    console.log("work done");
+function onMessageFromMain(evtArg){
+    //console.log(document.getElementById("txtMain"));
+    var data = evtArg.data;
+    if (data === "start"){
+        doWork();
+        self.postMessage("finished");
+        console.log("work done");
+    } else {
+        console.log("unknown message", data);
+    }
 }
 
