@@ -9,6 +9,14 @@ function findPrimeCount(start, end){
     var result = 0;
     for(var i=start; i<=end; i++){
         if (isPrime(i)) ++result;
+        var percentCompleted = Math.round(((i-start)/(end - start)) * 100);
+        if (percentCompleted % 5 === 0){
+            var output = {
+                type : "progress",
+                percentCompleted : percentCompleted
+            };
+            self.postMessage(output);
+        }
     }
     return result;
 }

@@ -20,6 +20,9 @@
             var data = evtArg.data;
             if (data.type === "completed"){
                 displayMessage(data.primeCount + " prime numbers found");
+            } else if (data.type === "progress"){
+                document.getElementById("workProgress").value  = data.percentCompleted;
+                document.getElementById("spanProgressPercent").innerHTML = data.percentCompleted + '%';
             } else if (data.type === "error"){
                 console.log(data);
             }
