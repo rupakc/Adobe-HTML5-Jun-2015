@@ -13,3 +13,10 @@ API
 Security
     - Same Origin Policy
     
+Sample
+=======
+Task Manager
+    - Add a new task
+    - Toggle a task completion status
+    - Remove Completed tasks
+    - The tasks should be persisted in the client
