@@ -4,5 +4,10 @@ function doWork(){
             for(var k=0; k<100; k++)
             {}
 }
-doWork();
-console.log("work done");
+self.addEventListener("message", onMessageFromMain);
+function onMessageFromMain(){
+    doWork();
+    self.postMessage("done");
+    console.log("work done");
+}
+

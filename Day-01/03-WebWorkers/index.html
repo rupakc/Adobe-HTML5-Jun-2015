@@ -5,13 +5,20 @@
     <title>Web Workers Demo</title>
     <script>
         window.addEventListener("DOMContentLoaded", init);
+        var worker;
+
         function init(){
             var btnDoWork = document.getElementById("btnDoWork");
             btnDoWork.addEventListener("click", onBtnDoWorkClick);
+
+            worker = new Worker("complexWork.js");
+            worker.addEventListener("message", onMessageFromWorker);
+        }
+        function onMessageFromWorker(){
+            displayMessage("Work Completed");
         }
         function onBtnDoWorkClick(){
-            var worker = new Worker("complexWork.js");
-            displayMessage("Work Completed");
+            worker.postMessage("start");
         }
 
         function displayMessage(msg){
