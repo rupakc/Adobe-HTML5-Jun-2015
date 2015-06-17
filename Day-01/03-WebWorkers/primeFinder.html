@@ -8,6 +8,35 @@
     Hints:
     1. use parseInt("1000",10) to convert a number in string format to number format
     */
+        window.addEventListener("DOMContentLoaded", init);
+        var worker = null;
+        function init(){
+            document.getElementById("btnFindPrimeCount")
+                .addEventListener("click", onBtnFindPrimeCountClick);
+            worker = new Worker("primeFinderWorker.js");
+            worker.addEventListener("message", onMessageFromWorker);
+        }
+        function onMessageFromWorker(evtArg){
+            var data = evtArg.data;
+            if (data.type === "completed"){
+                displayMessage(data.primeCount + " prime numbers found");
+            } else if (data.type === "error"){
+                console.log(data);
+            }
+        }
+        function onBtnFindPrimeCountClick(){
+            var start = parseInt(document.getElementById("txtStart").value,10),
+                end = parseInt(document.getElementById("txtEnd").value,10);
+            var input = {
+                type : 'findPrimeCount',
+                start : start,
+                end : end
+            };
+            worker.postMessage(input);
+        }
+        function displayMessage(msg){
+            document.getElementById("divMessages").innerHTML += msg + "<br/>";
+        }
     </script>
 </head>
 <body>
@@ -16,6 +45,11 @@
     <label for="">End :</label>
     <input type="text" name="" id="txtEnd">
     <input type="button" value="Find Prime Count" id="btnFindPrimeCount">
+    <div>
+        <progress id="workProgress" min="0" max="100" value="20"></progress>
+        <span id="spanProgressPercent">[% Completed]</span>
+    </div>
     <div id="divMessages"></div>
+
 </body>
 </html>
