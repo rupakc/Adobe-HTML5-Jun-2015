@@ -1,5 +1,7 @@
 
 var nodejsWebSocket = require('nodejs-websocket');
+var http=require('http');
+
 var server = nodejsWebSocket.createServer(function(connection){
     console.log("A new client connected");
     connection.on("text", function(msg){
@@ -9,5 +11,6 @@ var server = nodejsWebSocket.createServer(function(connection){
         }
     })
 });
+
 server.listen(9999);
 console.log("Socket server listening on port 9999");
