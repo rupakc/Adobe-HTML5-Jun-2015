@@ -5,7 +5,8 @@ taskManager.js
 style.css
 
 NETWORK:
-*
+* 
 
 FALLBACK:
 style-online.css    style-offline.css
+
