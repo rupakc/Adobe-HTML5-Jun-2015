@@ -1,0 +1,22 @@
+{
+  "name": "chatServer",
+  "version": "0.1.0",
+  "description": "A sample application to demonstrate websockets",
+  "main": "app.js",
+  "dependencies": {
+    "nodejs-websocket": "^1.2.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "prestart" : "npm install",
+    "start" : "node app",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "websockets",
+    "node",
+    "html5"
+  ],
+  "author": "Magesh K",
+  "license": "ISC"
+}
